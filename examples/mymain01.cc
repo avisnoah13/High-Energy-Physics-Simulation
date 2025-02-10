@@ -10,7 +10,7 @@ int main() { // Begin main program.
     Pythia pythia; // Declare Pythia object
     pythia.readString("WeakSingleBoson:ffbar2gmZ = on"); // Switch on process.
     pythia.readString("Beams:eCM = 8000."); // 8 TeV CM energy.
-    pythia.readString("Next:numberShowEvent = 5"); //List all 5 events
+    pythia.readString("Next:numberShowEvent = 1000"); //List all 5 events
     pythia.init(); // Initialize; incoming pp beams is default.
 
 // Set up Data Export
@@ -21,7 +21,7 @@ int main() { // Begin main program.
 
 
 // EVENT LOOP
-    for (int iEvent = 0; iEvent < 5; ++iEvent){
+    for (int iEvent = 0; iEvent < 1000; ++iEvent){
         pythia.next(); // Generate an event. Fill event record.
 
         int iZ = 0;
@@ -35,11 +35,12 @@ int main() { // Begin main program.
         //print some information for these remaining Z Bosons
             cout << "Transverse momentum = " << pythia.event[iZ].pT() << endl;
             cout << "Pseudorapidity = " << pythia.event[iZ].eta() << endl;
+            cout << "Transverse Energy = " << pythia.event[iZ].eT() << endl;
 
         //Add this information to the Data Export
 
         // Event #| Traverse Momentum | Pseudorapidity
-        mymain01OUTPUT << iEvent << "," << pythia.event[iZ].pT() << "," << pythia.event[iZ].eta() << endl;
+        mymain01OUTPUT << iEvent << "," << pythia.event[iZ].pT() << "," << pythia.event[iZ].eta() << "," << pythia.event[iZ].eT() << endl;
 
     }
 
